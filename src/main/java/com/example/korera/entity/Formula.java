@@ -15,7 +15,7 @@ public class Formula {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer formulaId;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Project project;
     private String formulaName;
 }

@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface UserRep extends JpaRepository<User,String >{
+public interface UserRep extends JpaRepository<User,String>{
+
 }

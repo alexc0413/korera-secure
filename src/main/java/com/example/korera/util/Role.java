@@ -1,2 +1,6 @@
-package com.example.korera.util;public class Role {
+package com.example.korera.util;
+
+public enum Role {
+    MANAGEMENT,
+    MEMBER;
 }

@@ -31,7 +31,7 @@ public class Resource {
     private LocalDateTime lastModify;
     @ManyToMany(mappedBy = "resources")
     private Set<Project> projects = new HashSet<>();
-    @OneToOne(mappedBy = "resource",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "resource", cascade = CascadeType.ALL)
     private ResourceDetail resourceDetail;
 
     public Resource() {

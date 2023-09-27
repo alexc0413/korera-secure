@@ -16,20 +16,20 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
     private final ResourceDetailRep resourceDetailRep;
 
     @Autowired
-    public ResourceDetailServiceImp(ResourceDetailRep resourceDetailRep){
-        this.resourceDetailRep =resourceDetailRep;
+    public ResourceDetailServiceImp(ResourceDetailRep resourceDetailRep) {
+        this.resourceDetailRep = resourceDetailRep;
     }
 
     @Override
-    public ResourceDetail createResourceDetail(ResourceDetail resourceDetail){
+    public ResourceDetail createResourceDetail(ResourceDetail resourceDetail) {
         resourceDetailRep.save(resourceDetail);
         return resourceDetail;
     }
 
     @Override
-    public ResourceDetail deleteResourceDetailById(Integer id){
+    public ResourceDetail deleteResourceDetailById(Integer id) {
         Optional<ResourceDetail> optional = resourceDetailRep.findById(id);
-        if(optional.isEmpty()){
+        if (optional.isEmpty()) {
             throw new ResourceDetailNotFoundException("Not existed");
         }
         resourceDetailRep.deleteById(id);
@@ -37,10 +37,10 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
     }
 
     @Override
-    public ResourceDetail updateResourceDetail(ResourceDetail resourceDetail){
+    public ResourceDetail updateResourceDetail(ResourceDetail resourceDetail) {
         Integer id = resourceDetail.getId();
         Optional<ResourceDetail> optional = resourceDetailRep.findById(id);
-        if(optional.isEmpty()){
+        if (optional.isEmpty()) {
             throw new ResourceDetailNotFoundException("Not existed");
         }
         resourceDetailRep.save(resourceDetail);
@@ -48,16 +48,16 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
     }
 
     @Override
-    public ResourceDetail getResourceDetailById(Integer id){
+    public ResourceDetail getResourceDetailById(Integer id) {
         Optional<ResourceDetail> optional = resourceDetailRep.findById(id);
-        if(optional.isEmpty()){
+        if (optional.isEmpty()) {
             throw new ResourceDetailNotFoundException("Not existed");
         }
         return optional.get();
     }
 
     @Override
-    public List<ResourceDetail> getAll(){
+    public List<ResourceDetail> getAll() {
         return resourceDetailRep.findAll();
     }
 

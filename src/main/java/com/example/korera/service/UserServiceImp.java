@@ -15,20 +15,20 @@ public class UserServiceImp implements UserService {
     private final UserRep userRep;
 
     @Autowired
-    public UserServiceImp(UserRep userRep){
+    public UserServiceImp(UserRep userRep) {
         this.userRep = userRep;
     }
 
     @Override
-    public User createUser(User user){
+    public User createUser(User user) {
         userRep.save(user);
         return user;
     }
 
     @Override
-    public User deleteUserById(String id){
+    public User deleteUserById(String id) {
         User user = getUserById(id);
-        if(user==null){
+        if (user == null) {
             throw new UserNotFoundException("User it not found");
         }
         userRep.deleteById(id);
@@ -36,10 +36,10 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User updateUser(User user){
+    public User updateUser(User user) {
         String id = user.getUserName();
         User u = getUserById(id);
-        if(u==null){
+        if (u == null) {
             throw new UserNotFoundException("User it not found");
         }
         userRep.save(user);
@@ -47,16 +47,16 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User getUserById(String id){
+    public User getUserById(String id) {
         Optional<User> user = userRep.findById(id);
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             throw new UserNotFoundException("User it not found");
         }
         return user.get();
     }
 
     @Override
-    public List<User> getAll(){
+    public List<User> getAll() {
         return userRep.findAll();
     }
 }

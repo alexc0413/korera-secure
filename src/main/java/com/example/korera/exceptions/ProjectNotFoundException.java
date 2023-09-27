@@ -1,8 +1,8 @@
 package com.example.korera.exceptions;
 
-public class ProjectNotFoundException extends RuntimeException{
+public class ProjectNotFoundException extends RuntimeException {
 
-    public ProjectNotFoundException(String message){
+    public ProjectNotFoundException(String message) {
         super(message);
     }
 

@@ -14,40 +14,41 @@ import java.util.List;
 public class FormulaController {
 
     private final FormulaService formulaService;
+
     @Autowired
-    public FormulaController(FormulaService formulaService){
+    public FormulaController(FormulaService formulaService) {
         this.formulaService = formulaService;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Formula> createFormula(@RequestBody Formula formula){
+    public ResponseEntity<Formula> createFormula(@RequestBody Formula formula) {
         Formula f = formulaService.createFormula(formula);
         return new ResponseEntity<>(f, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Formula> deleteFormula(@PathVariable int id){
+    public ResponseEntity<Formula> deleteFormula(@PathVariable int id) {
 
         Formula f = formulaService.deleteFormulaById(id);
-        return new ResponseEntity<>(f,HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(f, HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Formula> updateFormula(@RequestBody Formula formula){
+    public ResponseEntity<Formula> updateFormula(@RequestBody Formula formula) {
         Formula f = formulaService.updateFormula(formula);
-        return new ResponseEntity<>(f,HttpStatus.OK);
+        return new ResponseEntity<>(f, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Formula> getFormulaById(@PathVariable int id){
+    public ResponseEntity<Formula> getFormulaById(@PathVariable int id) {
         Formula f = formulaService.getFormulaById(id);
-        return new ResponseEntity<>(f,HttpStatus.OK);
+        return new ResponseEntity<>(f, HttpStatus.OK);
     }
 
     @GetMapping("/getall")
-    public ResponseEntity<List<Formula>> getAllFormula(){
+    public ResponseEntity<List<Formula>> getAllFormula() {
         List<Formula> formulas = formulaService.getAll();
-        return new ResponseEntity<>(formulas,HttpStatus.OK);
+        return new ResponseEntity<>(formulas, HttpStatus.OK);
     }
 
 }

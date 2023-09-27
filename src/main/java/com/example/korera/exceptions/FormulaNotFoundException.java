@@ -1,8 +1,8 @@
 package com.example.korera.exceptions;
 
-public class FormulaNotFoundException extends RuntimeException{
+public class FormulaNotFoundException extends RuntimeException {
 
-    public FormulaNotFoundException(String message){
+    public FormulaNotFoundException(String message) {
         super(message);
     }
 

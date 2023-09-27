@@ -14,20 +14,20 @@ public class FormulaServiceImp implements FormulaService {
     private final FormulaRep formulaRep;
 
     @Autowired
-    public FormulaServiceImp(FormulaRep formulaRep){
+    public FormulaServiceImp(FormulaRep formulaRep) {
         this.formulaRep = formulaRep;
     }
 
     @Override
-    public Formula createFormula(Formula formula){
+    public Formula createFormula(Formula formula) {
         formulaRep.save(formula);
         return formula;
     }
 
     @Override
-    public Formula deleteFormulaById(int id){
+    public Formula deleteFormulaById(int id) {
         Formula Formula = getFormulaById(id);
-        if(Formula==null){
+        if (Formula == null) {
             throw new FormulaNotFoundException("Formula is not found");
         }
         formulaRep.deleteById(id);
@@ -35,8 +35,8 @@ public class FormulaServiceImp implements FormulaService {
     }
 
     @Override
-    public Formula updateFormula(Formula formula){
-        if(formula==null){
+    public Formula updateFormula(Formula formula) {
+        if (formula == null) {
             throw new FormulaNotFoundException("Formula is not found");
         }
         formulaRep.save(formula);
@@ -44,16 +44,16 @@ public class FormulaServiceImp implements FormulaService {
     }
 
     @Override
-    public Formula getFormulaById(int id){
+    public Formula getFormulaById(int id) {
         Optional<Formula> Formula = formulaRep.findById(id);
-        if(Formula.isEmpty()){
+        if (Formula.isEmpty()) {
             throw new FormulaNotFoundException("Formula is not found");
         }
         return Formula.get();
     }
 
     @Override
-    public List<Formula> getAll(){
+    public List<Formula> getAll() {
         return formulaRep.findAll();
     }
 }

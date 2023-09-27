@@ -1,4 +1,17 @@
 package com.example.korera.service;
 
-public class ResourceDetailService {
+import com.example.korera.entity.ResourceDetail;
+
+import java.util.List;
+
+public interface ResourceDetailService {
+    ResourceDetail createResourceDetail(ResourceDetail resourceDetail);
+
+    ResourceDetail deleteResourceDetailById(Integer id);
+
+    ResourceDetail updateResourceDetail(ResourceDetail resourceDetail);
+
+    ResourceDetail getResourceDetailById(Integer id);
+
+    List<ResourceDetail> getAll();
 }

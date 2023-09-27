@@ -4,10 +4,12 @@ import com.example.korera.entity.Project;
 import com.example.korera.exceptions.ProjectNotFoundException;
 import com.example.korera.repository.ProjectRep;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProjectServiceImp implements ProjectService {
     private final ProjectRep projectRep;
 

@@ -1,4 +1,4 @@
-package com.example.korera;
+package com.example.korera.controlletest;
 import com.example.korera.controller.*;
 import com.example.korera.entity.Project;
 import com.example.korera.service.*;

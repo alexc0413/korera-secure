@@ -16,7 +16,7 @@ import java.util.Set;
 
 @EntityListeners(AuditingEntityListener.class)
 //@Data
-//@AllArgsConstructor
+@AllArgsConstructor
 //@NoArgsConstructor
 @Entity
 @Builder
@@ -36,6 +36,7 @@ public class Resource {
 
     public Resource() {
     }
+
 
     public Integer getResourceId() {
         return resourceId;

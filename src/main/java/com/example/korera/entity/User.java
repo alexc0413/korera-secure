@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @EntityListeners(AuditingEntityListener.class)
 //@Data
-//@AllArgsConstructor
+@AllArgsConstructor
 //@NoArgsConstructor
 @Entity
 @Builder
@@ -42,6 +42,7 @@ public class User {
 
     public User() {
     }
+
 
     public String getUserName() {
         return userName;

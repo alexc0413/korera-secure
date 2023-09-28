@@ -2,6 +2,7 @@ package com.example.korera.controller;
 
 
 import com.example.korera.entity.Resource;
+import com.example.korera.service.ResourceService;
 import com.example.korera.service.ResourceServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/resource")
 public class ResourceController {
-    private final ResourceServiceImp resourceServiceImp;
+    private final ResourceService resourceServiceImp;
 
     @Autowired
-    public ResourceController(ResourceServiceImp resourceServiceImp) {
+    public ResourceController(ResourceService resourceServiceImp) {
         this.resourceServiceImp = resourceServiceImp;
     }
 

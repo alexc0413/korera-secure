@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Builder
 //@Data
-//@AllArgsConstructor
+@AllArgsConstructor
 //@NoArgsConstructor
 public class ResourceDetail {
     @Id
@@ -23,6 +23,8 @@ public class ResourceDetail {
 
     public ResourceDetail() {
     }
+
+
 
     public Integer getId() {
         return id;

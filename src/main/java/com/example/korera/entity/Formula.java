@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 //@Data
-//@AllArgsConstructor
+@AllArgsConstructor
 //@NoArgsConstructor
 @Entity
 @Builder
@@ -18,6 +18,7 @@ public class Formula {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer formulaId;
     @ManyToOne
+    @JoinColumn(name = "project_id")
     private Project project;
     private String formulaName;
 

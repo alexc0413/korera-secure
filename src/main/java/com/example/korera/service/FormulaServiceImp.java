@@ -1,6 +1,7 @@
 package com.example.korera.service;
 
 import com.example.korera.entity.Formula;
+import com.example.korera.exceptions.CreationException;
 import com.example.korera.exceptions.FormulaNotFoundException;
 import com.example.korera.repository.FormulaRep;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,12 @@ public class FormulaServiceImp implements FormulaService {
 
     @Override
     public Formula createFormula(Formula formula) {
+        Integer id = formula.getFormulaId();
         formulaRep.save(formula);
+        Optional<Formula> formula1 = formulaRep.findById(id);
+        if(formula1.isEmpty()){
+            throw new CreationException("cannot create");
+        }
         return formula;
     }
 

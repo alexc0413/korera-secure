@@ -14,10 +14,10 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserServiceImp userServiceImp;
+    private final UserService userServiceImp;
 
     @Autowired
-    public UserController(UserServiceImp userServiceImp) {
+    public UserController(UserService userServiceImp) {
         this.userServiceImp = userServiceImp;
     }
 

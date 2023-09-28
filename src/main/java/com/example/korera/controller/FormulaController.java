@@ -33,7 +33,7 @@ public class FormulaController {
         return new ResponseEntity<>(f, HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Formula> updateFormula(@RequestBody Formula formula) {
         Formula f = formulaService.updateFormula(formula);
         return new ResponseEntity<>(f, HttpStatus.OK);

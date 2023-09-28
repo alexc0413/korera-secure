@@ -33,7 +33,7 @@ public class ResourceController {
         return new ResponseEntity<>(resource, HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Resource> updateResource(Resource resource) {
         Resource r = resourceServiceImp.updateResource(resource);
         return new ResponseEntity<>(r, HttpStatus.OK);

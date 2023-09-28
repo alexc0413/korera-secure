@@ -33,7 +33,7 @@ public class ProjectController {
         return new ResponseEntity<>(p, HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Project> updateProject(@RequestBody Project project) {
         Project p = projectService.updateProject(project);
         return new ResponseEntity<>(p, HttpStatus.OK);

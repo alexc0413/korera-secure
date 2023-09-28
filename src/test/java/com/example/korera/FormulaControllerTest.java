@@ -11,10 +11,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -90,7 +88,6 @@ public class FormulaControllerTest {
         formula1.setFormulaName("this is formula");
         list.add(formula1);
         when(formulaService.getAll()).thenReturn(list);
-
         mockMvc.perform(get("/formula/getall"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))

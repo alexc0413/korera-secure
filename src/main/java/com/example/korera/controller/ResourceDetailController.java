@@ -30,9 +30,9 @@ public class ResourceDetailController {
         return new ResponseEntity<>(ResourceDetail,HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<ResourceDetail> updateResource(ResourceDetail ResourceDetail){
-        ResourceDetail r  = resourceServiceImp.updateResourceDetail(ResourceDetail);
+    @PutMapping("/update")
+    public ResponseEntity<ResourceDetail> updateResource(@RequestBody ResourceDetail resourceDetail){
+        ResourceDetail r  = resourceServiceImp.updateResourceDetail(resourceDetail);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 

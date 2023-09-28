@@ -33,7 +33,7 @@ public class UserController {
         return new ResponseEntity<>(u, HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         User u = userServiceImp.updateUser(user);
         return new ResponseEntity<>(u, HttpStatus.OK);

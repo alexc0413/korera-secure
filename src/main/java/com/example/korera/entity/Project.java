@@ -1,10 +1,11 @@
 package com.example.korera.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -13,23 +14,35 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "projectId")
 @EntityListeners(AuditingEntityListener.class)
-//@Data
+@Data
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 @Entity
 @Builder
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer projectId;
+
+    @ToString.Exclude
     @ManyToOne
     private User user;
+
+//    @JsonManagedReference
+    @ToString.Exclude
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Formula> formulas;
+
     private String projectName;
+
     @CreatedDate
     private LocalDateTime createDate;
+
+    @ToString.Exclude
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "project_resource",
@@ -38,66 +51,4 @@ public class Project {
     )
     private Set<Resource> resources = new HashSet<>();
 
-    public Project() {
-    }
-
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Formula> getFormulas() {
-        return formulas;
-    }
-
-    public void setFormulas(List<Formula> formulas) {
-        this.formulas = formulas;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public Set<Resource> getResources() {
-        return resources;
-    }
-
-    public void setResources(Set<Resource> resources) {
-        this.resources = resources;
-    }
-
-    @Override
-    public String toString() {
-        return "Project{" +
-                "projectId=" + projectId +
-                ", user=" + user +
-                ", formulas=" + formulas +
-                ", projectName='" + projectName + '\'' +
-                ", createDate=" + createDate +
-                ", resources=" + resources +
-                '}';
-    }
 }

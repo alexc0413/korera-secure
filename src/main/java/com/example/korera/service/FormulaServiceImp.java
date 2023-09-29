@@ -42,7 +42,8 @@ public class FormulaServiceImp implements FormulaService {
 
     @Override
     public Formula updateFormula(Formula formula) {
-        if (formula == null) {
+        Optional<Formula> optional = formulaRep.findById(formula.getFormulaId());
+        if (optional.isEmpty()) {
             throw new FormulaNotFoundException("Formula is not found");
         }
         formulaRep.save(formula);

@@ -56,15 +56,6 @@
             <artifactId>h2</artifactId>
             <scope>compile</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-
     </dependencies>
 
     <build>

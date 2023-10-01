@@ -4,6 +4,7 @@ import com.example.korera.dto.ResponseProject;
 import com.example.korera.entity.Formula;
 import com.example.korera.entity.Project;
 import com.example.korera.entity.Resource;
+import com.example.korera.exceptions.CreationException;
 import com.example.korera.exceptions.FormulaNotFoundException;
 import com.example.korera.exceptions.ProjectNotFoundException;
 import com.example.korera.exceptions.ResourceNotFoundException;
@@ -34,8 +35,11 @@ public class ProjectServiceImp implements ProjectService {
     @Override
     public Project createProject(Project project) {
         projectRep.save(project);
-
-        return projectRep.findById(project.getProjectId()).get();
+        Optional<Project> project1 = projectRep.findById(project.getProjectId());
+        if(project1.isEmpty()){
+            throw new CreationException("cannot create");
+        }
+        return project1.get();
     }
 
     @Override

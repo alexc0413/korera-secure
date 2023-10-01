@@ -1,7 +1,9 @@
 package com.example.korera.service;
 
 
+import com.example.korera.entity.Formula;
 import com.example.korera.entity.Resource;
+import com.example.korera.exceptions.CreationException;
 import com.example.korera.exceptions.ResourceDetailNotFoundException;
 import com.example.korera.repository.ResourceRep;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,11 @@ public class ResourceServiceImp implements ResourceService {
     @Override
     public Resource createResource(Resource resource) {
         resourceRep.save(resource);
-        return resource;
+        Optional<Resource> resource1 = resourceRep.findById(resource.getResourceId());
+        if(resource1.isEmpty()){
+            throw new CreationException("cannot create");
+        }
+        return resource1.get();
     }
 
     @Override

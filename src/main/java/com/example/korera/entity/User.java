@@ -39,7 +39,4 @@ public class User {
         this.userName = value.toString();
     }
 
-
-
-
 }

@@ -1,6 +1,7 @@
 package com.example.korera.service;
 
 import com.example.korera.entity.User;
+import com.example.korera.exceptions.CreationException;
 import com.example.korera.exceptions.UserNotFoundException;
 import com.example.korera.repository.UserRep;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,11 @@ public class UserServiceImp implements UserService {
     @Override
     public User createUser(User user) {
         userRep.save(user);
-        return user;
+        Optional<User> user1 = userRep.findById(user.getUserName());
+        if(user1.isEmpty()){
+            throw new CreationException("cannot create");
+        }
+        return user1.get();
     }
 
     @Override

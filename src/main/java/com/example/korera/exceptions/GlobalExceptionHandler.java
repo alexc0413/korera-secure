@@ -39,5 +39,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(FormulaIsNullException.class)
+    public ResponseEntity<String> handleFormulaIsNullException(FormulaIsNullException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+    }
+
 
 }

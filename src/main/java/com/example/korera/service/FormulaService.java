@@ -7,7 +7,7 @@ import java.util.List;
 public interface FormulaService {
     Formula createFormula(Formula formula);
 
-    Formula deleteFormulaById(int id);
+    void deleteFormulaById(int id);
 
     Formula updateFormula(Formula formula);
 

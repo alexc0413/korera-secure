@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -56,12 +57,10 @@ public class ResourceControllerTest {
     }
     @Test
     public void resourceDelete() throws Exception {
-        when(resourceService.deleteResourceById(1)).thenReturn(resource);
+        doNothing().when(resourceService).deleteResourceById(1);
         mockMvc.perform(delete("/resource/delete/1")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent())
-                .andExpect(jsonPath("$.resourceId",is(1)))
-                .andExpect(jsonPath("$.description",is("resourceDescription")));
+                .andExpect(status().isNoContent());
     }
     @Test
     public void resourceUpdate() throws Exception {

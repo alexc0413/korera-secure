@@ -1,5 +1,6 @@
 package com.example.korera.controlletest;
 import com.example.korera.controller.*;
+import com.example.korera.dto.ResponseProject;
 import com.example.korera.entity.Project;
 import com.example.korera.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -35,12 +37,16 @@ public class ProjectControllerTest {
 
     private Project project;
     private String jsonContent;
+
+    private ResponseProject responseProject;
     @BeforeEach
     public void setUp() throws JsonProcessingException {
         project = new Project();
         project.setProjectId(1);
         project.setProjectName("project");
         jsonContent = new ObjectMapper().writeValueAsString(project);
+        responseProject.setId(1);
+        responseProject.setName("project");
     }
 
     @Test
@@ -56,12 +62,10 @@ public class ProjectControllerTest {
     }
     @Test
     public void projectDelete() throws Exception {
-        when(projectService.deleteProjectById(1)).thenReturn(project);
+        doNothing().when(projectService).deleteProjectById(1);
         mockMvc.perform(delete("/project/delete/1")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent())
-                .andExpect(jsonPath("$.projectId",is(1)))
-                .andExpect(jsonPath("$.projectName",is("project")));
+                .andExpect(status().isNoContent());
     }
     @Test
     public void projectUpdate() throws Exception {

@@ -27,13 +27,12 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
     }
 
     @Override
-    public ResourceDetail deleteResourceDetailById(Integer id) {
+    public void deleteResourceDetailById(Integer id) {
         Optional<ResourceDetail> optional = resourceDetailRep.findById(id);
         if (optional.isEmpty()) {
             throw new ResourceDetailNotFoundException("Not existed");
         }
         resourceDetailRep.deleteById(id);
-        return optional.get();
     }
 
     @Override

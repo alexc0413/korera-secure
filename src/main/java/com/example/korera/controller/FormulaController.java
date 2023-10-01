@@ -36,10 +36,9 @@ public class FormulaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Formula> deleteFormula(@PathVariable int id) {
-
-        Formula f = formulaService.deleteFormulaById(id);
-        return new ResponseEntity<>(f, HttpStatus.NO_CONTENT);
+    public ResponseEntity<Void> deleteFormula(@PathVariable int id) {
+        formulaService.deleteFormulaById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")

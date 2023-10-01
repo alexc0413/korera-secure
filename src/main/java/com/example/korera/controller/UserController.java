@@ -28,9 +28,9 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable String id) {
-        User u = userServiceImp.deleteUserById(id);
-        return new ResponseEntity<>(u, HttpStatus.NO_CONTENT);
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
+        userServiceImp.deleteUserById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")

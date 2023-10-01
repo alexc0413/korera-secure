@@ -28,13 +28,13 @@ public class ResourceController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Resource> deleteResource(@PathVariable Integer id) {
-        Resource resource = resourceServiceImp.deleteResourceById(id);
-        return new ResponseEntity<>(resource, HttpStatus.NO_CONTENT);
+    public ResponseEntity<Void> deleteResource(@PathVariable Integer id) {
+        resourceServiceImp.deleteResourceById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Resource> updateResource(Resource resource) {
+    public ResponseEntity<Resource> updateResource(@RequestBody Resource resource) {
         Resource r = resourceServiceImp.updateResource(resource);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -57,12 +58,9 @@ public class UserControllerTest {
 
     @Test
     public void userDelete() throws Exception{
-        when(userService.deleteUserById("Zeyu")).thenReturn(user);
+        doNothing().when(userService).deleteUserById("Zeyu");
         mockMvc.perform(delete("/user/delete/Zeyu"))
-                .andExpect(status().isNoContent())
-                .andExpect(jsonPath("$.userName",is("Zeyu")))
-                .andExpect(jsonPath("$.role",is("MEMBER")))
-                .andExpect(jsonPath("$.password",is("1234")));
+                .andExpect(status().isNoContent());
     }
 
     @Test

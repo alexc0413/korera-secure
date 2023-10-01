@@ -25,9 +25,9 @@ public class ResourceDetailController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ResourceDetail> deleteResource(@PathVariable Integer id){
-        ResourceDetail ResourceDetail = resourceServiceImp.deleteResourceDetailById(id);
-        return new ResponseEntity<>(ResourceDetail,HttpStatus.NO_CONTENT);
+    public ResponseEntity<Void> deleteResource(@PathVariable Integer id){
+        resourceServiceImp.deleteResourceDetailById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")

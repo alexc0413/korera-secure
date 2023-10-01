@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -54,12 +55,10 @@ public class FormulaControllerTest {
     }
     @Test
     public void formulaDelete() throws Exception {
-        when(formulaService.deleteFormulaById(1)).thenReturn(formula);
+        doNothing().when(formulaService).deleteFormulaById(1);
         mockMvc.perform(delete("/formula/delete/1")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent())
-                .andExpect(jsonPath("$.formulaId",is(1)))
-                .andExpect(jsonPath("$.formulaName",is("formula")));
+                .andExpect(status().isNoContent());
     }
     @Test
     public void formulaUpdate() throws Exception {

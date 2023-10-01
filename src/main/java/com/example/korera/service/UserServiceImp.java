@@ -26,13 +26,12 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User deleteUserById(String id) {
+    public void deleteUserById(String id) {
         User user = getUserById(id);
         if (user == null) {
             throw new UserNotFoundException("User it not found");
         }
         userRep.deleteById(id);
-        return user;
     }
 
     @Override

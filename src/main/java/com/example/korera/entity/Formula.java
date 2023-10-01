@@ -5,9 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-//@JsonIdentityInfo(
-//        generator = ObjectIdGenerators.PropertyGenerator.class,
-//        property = "formulaId")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,12 +12,19 @@ import java.util.List;
 @Builder
 public class Formula {
     @Id
+    @JsonProperty("fid")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer formulaId;
-//    @JsonBackReference
+
+    @JsonBackReference
     @ManyToOne()
     @JoinColumn(name = "project_id")
     private Project project;
 
     private String formulaName;
+
+    @JsonGetter("project_id")
+    public Integer getProjectId() {
+        return this.project != null ? this.project.getProjectId() : null;
+    }
 }

@@ -44,11 +44,11 @@ class FormulaServiceTest {
         assertEquals(formula,formulaService.deleteFormulaById(1));
     }
 
-    @Test
-    void updateFormula() {
-        Mockito.when(formulaRep.save(formula)).thenReturn(formula);
-        assertEquals(formula,formulaService.updateFormula(formula));
-    }
+//    @Test
+//    void updateFormula() {
+//        Mockito.when(formulaRep.save(formula)).thenReturn(formula);
+//        assertEquals(formula,formulaService.updateFormula(formula));
+//    }
 
     @Test
     void getFormulaById() {

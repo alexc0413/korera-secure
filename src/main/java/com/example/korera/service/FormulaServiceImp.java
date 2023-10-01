@@ -21,23 +21,21 @@ public class FormulaServiceImp implements FormulaService {
 
     @Override
     public Formula createFormula(Formula formula) {
-        Integer id = formula.getFormulaId();
         formulaRep.save(formula);
-        Optional<Formula> formula1 = formulaRep.findById(id);
+        Optional<Formula> formula1 = formulaRep.findById(formula.getFormulaId());
         if(formula1.isEmpty()){
             throw new CreationException("cannot create");
         }
-        return formula;
+        return formula1.get();
     }
 
     @Override
-    public Formula deleteFormulaById(int id) {
+    public void deleteFormulaById(int id) {
         Formula Formula = getFormulaById(id);
         if (Formula == null) {
             throw new FormulaNotFoundException("Formula is not found");
         }
         formulaRep.deleteById(id);
-        return Formula;
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.List;
 public interface ResourceDetailService {
     ResourceDetail createResourceDetail(ResourceDetail resourceDetail);
 
-    ResourceDetail deleteResourceDetailById(Integer id);
+    void deleteResourceDetailById(Integer id);
 
     ResourceDetail updateResourceDetail(ResourceDetail resourceDetail);
 

@@ -1,6 +1,7 @@
 package com.example.korera.controller;
 
 import com.example.korera.entity.Project;
+import com.example.korera.entity.Resource;
 import com.example.korera.exceptions.FormulaIsNullException;
 import com.example.korera.service.ProjectService;
 import jakarta.validation.Valid;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
 
     private final ProjectService projectService;
+
 
     @Autowired
     public ProjectController(ProjectService projectService) {
@@ -41,7 +44,7 @@ public class ProjectController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateProject(@Valid @RequestBody Project project, BindingResult bindingResult) {
+    public ResponseEntity<?> updateProject(@Valid @RequestBody Project project, BindingResult bindingResult) throws Exception {
         if(bindingResult.hasErrors()){
             String errorMessage = Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);

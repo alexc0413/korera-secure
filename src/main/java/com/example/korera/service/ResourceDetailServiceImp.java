@@ -1,10 +1,13 @@
 package com.example.korera.service;
 
 
+import com.example.korera.entity.Resource;
 import com.example.korera.entity.ResourceDetail;
 import com.example.korera.exceptions.CreationException;
 import com.example.korera.exceptions.ResourceDetailNotFoundException;
+import com.example.korera.exceptions.ResourceNotFoundException;
 import com.example.korera.repository.ResourceDetailRep;
+import com.example.korera.repository.ResourceRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,20 +18,23 @@ import java.util.Optional;
 public class ResourceDetailServiceImp implements ResourceDetailService {
 
     private final ResourceDetailRep resourceDetailRep;
+    private final ResourceRep resourceRep;
 
     @Autowired
-    public ResourceDetailServiceImp(ResourceDetailRep resourceDetailRep) {
+    public ResourceDetailServiceImp(ResourceDetailRep resourceDetailRep, ResourceRep resourceRep) {
         this.resourceDetailRep = resourceDetailRep;
+        this.resourceRep = resourceRep;
     }
 
     @Override
     public ResourceDetail createResourceDetail(ResourceDetail resourceDetail) {
-        resourceDetailRep.save(resourceDetail);
-        Optional<ResourceDetail> resourceDetail1 = resourceDetailRep.findById(resourceDetail.getId());
-        if(resourceDetail1.isEmpty()){
-            throw new CreationException("cannot create");
+        Optional<Resource> optionalResource = resourceRep.findById(resourceDetail.getResource().getResourceId());
+        if(optionalResource.isEmpty()){
+            throw new ResourceNotFoundException("Resource is not existed");
         }
-        return resourceDetail1.get();
+        resourceDetail.setResource(optionalResource.get());
+        resourceDetailRep.save(resourceDetail);
+        return resourceDetail;
     }
 
     @Override
@@ -37,6 +43,8 @@ public class ResourceDetailServiceImp implements ResourceDetailService {
         if (optional.isEmpty()) {
             throw new ResourceDetailNotFoundException("Not existed");
         }
+        ResourceDetail dbResourceDetail = optional.get();
+        dbResourceDetail.getResource().setResourceDetail(null);
         resourceDetailRep.deleteById(id);
     }
 

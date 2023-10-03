@@ -10,9 +10,11 @@ public interface ProjectService {
 
     void deleteProjectById(int id);
 
-    Project updateProject(Project project);
+    Project updateProject(Project project) throws Exception;
 
     Project getProjectById(int id);
 
     List<Project> getAll();
+
+
 }

@@ -1,8 +1,10 @@
 package com.example.korera.service;
 
+import com.example.korera.entity.Project;
 import com.example.korera.entity.User;
 import com.example.korera.exceptions.CreationException;
 import com.example.korera.exceptions.UserNotFoundException;
+import com.example.korera.repository.ProjectRep;
 import com.example.korera.repository.UserRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +16,12 @@ import java.util.Optional;
 public class UserServiceImp implements UserService {
 
     private final UserRep userRep;
+    private final ProjectRep projectRep;
 
     @Autowired
-    public UserServiceImp(UserRep userRep) {
+    public UserServiceImp(UserRep userRep, ProjectRep projectRep) {
         this.userRep = userRep;
+        this.projectRep = projectRep;
     }
 
     @Override
@@ -46,6 +50,12 @@ public class UserServiceImp implements UserService {
         if (u == null) {
             throw new UserNotFoundException("User it not found");
         }
+        List<Project> projects = user.getProjects();
+        for(Project p : projects){
+            p.setUser(user);
+//            projectRep.save(p);
+        }
+
         userRep.save(user);
         return user;
     }

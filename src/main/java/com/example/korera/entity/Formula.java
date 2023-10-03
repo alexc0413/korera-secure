@@ -16,7 +16,7 @@ public class Formula {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer formulaId;
 
-    @JsonBackReference
+    @JsonBackReference(value = "projectAndFormulas")
     @ManyToOne()
     @JoinColumn(name = "project_id")
     private Project project;

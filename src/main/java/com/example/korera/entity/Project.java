@@ -7,12 +7,14 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
-//@JsonIdentityInfo(
-//        generator = ObjectIdGenerators.PropertyGenerator.class,
-//        property = "pid")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "pid",
+        scope = Project.class)
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @AllArgsConstructor
@@ -25,13 +27,12 @@ public class Project {
     @JsonProperty("pid")
     private Integer projectId;
 
-    @ToString.Exclude
+
     @ManyToOne
     private User user;
 
-//    @NotNull(message = "this field cannot be empty when updating")
-    @JsonManagedReference
-    @ToString.Exclude
+
+    @JsonManagedReference(value = "projectAndFormulas")
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     // this field cannot be dereferenced since orphanRemoval = true
     private List<Formula> formulas;
@@ -40,37 +41,46 @@ public class Project {
     @NotEmpty(message = "name cannot be empty")
     private String projectName;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @CreatedDate
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDate;
 
-    @ToString.Exclude
-    @ManyToMany
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "project_resource",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "resource_id")
     )
-//    @JsonBackReference
     private Set<Resource> resources = new HashSet<>();
 
-    public Project(Integer id, String name) {
-        this.projectId = id;
-        this.projectName = name;
-    }
-
-
     @JsonGetter("Resources ID")
-    public List<Integer> getResourcesId(){
+    public List<Integer> getResourcesId() {
         List<Integer> list = new ArrayList<>();
-        for(Resource r : resources){
+        for (Resource r : resources) {
             list.add(r.getResourceId());
         }
         return list;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(projectId);
+    @JsonGetter("UserName")
+    public String retrieveUserName() {
+        if (this.user != null) {
+            return this.user.getUserName();
+        }
+        return null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Project project)) return false;
+        return Objects.equals(getProjectId(), project.getProjectId()) && Objects.equals(getProjectName(), project.getProjectName()) && Objects.equals(getCreateDate(), project.getCreateDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getProjectId(), getProjectName(), getCreateDate());
+    }
 }

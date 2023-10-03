@@ -34,7 +34,7 @@ public class ResourceController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Resource> updateResource(@RequestBody Resource resource) {
+    public ResponseEntity<Resource> updateResource(@RequestBody Resource resource) throws Exception {
         Resource r = resourceServiceImp.updateResource(resource);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }

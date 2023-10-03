@@ -9,7 +9,7 @@ public interface ResourceService {
 
     void deleteResourceById(Integer id);
 
-    Resource updateResource(Resource resource);
+    Resource updateResource(Resource resource) throws Exception;
 
     Resource getResourceById(Integer id);
 

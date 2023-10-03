@@ -9,42 +9,44 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/resourcedetail")
+    @RequestMapping("/resourcedetail")
 public class ResourceDetailController {
-    private final ResourceDetailService resourceServiceImp;
+    private final ResourceDetailService resourceDetailService;
 
     @Autowired
-    public ResourceDetailController(ResourceDetailService resourceServiceImp){
-        this.resourceServiceImp = resourceServiceImp;
+    public ResourceDetailController(ResourceDetailService resourceDetailService){
+        this.resourceDetailService = resourceDetailService;
     }
 
+
+    // have to make sure Resource has already existed and must use persisted resource object
     @PostMapping("/create")
     public ResponseEntity<ResourceDetail> createResource(@RequestBody ResourceDetail resourceDetail){
-        ResourceDetail resourceDetail1 = resourceServiceImp.createResourceDetail(resourceDetail);
+        ResourceDetail resourceDetail1 = resourceDetailService.createResourceDetail(resourceDetail);
         return new ResponseEntity<>(resourceDetail1, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteResource(@PathVariable Integer id){
-        resourceServiceImp.deleteResourceDetailById(id);
+        resourceDetailService.deleteResourceDetailById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")
     public ResponseEntity<ResourceDetail> updateResource(@RequestBody ResourceDetail resourceDetail){
-        ResourceDetail r  = resourceServiceImp.updateResourceDetail(resourceDetail);
+        ResourceDetail r  = resourceDetailService.updateResourceDetail(resourceDetail);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
     public ResponseEntity<ResourceDetail> getResourceById(@PathVariable Integer id){
-        ResourceDetail r  = resourceServiceImp.getResourceDetailById(id);
+        ResourceDetail r  = resourceDetailService.getResourceDetailById(id);
         return new ResponseEntity<>(r,HttpStatus.OK);
     }
 
     @GetMapping("/getall")
     public ResponseEntity<List<ResourceDetail>> getAll(){
-        List<ResourceDetail> resources = resourceServiceImp.getAll();
+        List<ResourceDetail> resources = resourceDetailService.getAll();
         return new ResponseEntity<>(resources,HttpStatus.OK);
     }
 }

@@ -27,10 +27,8 @@ public class Project {
     @JsonProperty("pid")
     private Integer projectId;
 
-
     @ManyToOne
     private User user;
-
 
     @JsonManagedReference(value = "projectAndFormulas")
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -67,7 +65,7 @@ public class Project {
     @JsonGetter("UserName")
     public String retrieveUserName() {
         if (this.user != null) {
-            return this.user.getUserName();
+            return this.user.getUsername();
         }
         return null;
     }

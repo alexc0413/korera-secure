@@ -27,7 +27,7 @@ public class UserServiceImp implements UserService {
     @Override
     public User createUser(User user) {
         userRep.save(user);
-        Optional<User> user1 = userRep.findById(user.getUserName());
+        Optional<User> user1 = userRep.findById(user.getUsername());
         if(user1.isEmpty()){
             throw new CreationException("cannot create");
         }
@@ -45,7 +45,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User updateUser(User user) {
-        String id = user.getUserName();
+        String id = user.getUsername();
         User u = getUserById(id);
         if (u == null) {
             throw new UserNotFoundException("User it not found");
